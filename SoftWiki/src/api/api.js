@@ -61,7 +61,7 @@ export async function del(url) {
 export async function login(email, password) {
     const result = await post(settings.host + '/users/login', { email, password });
 
-    sessionStorage.setItem('username', result.username);
+    sessionStorage.setItem('username', email);
     sessionStorage.setItem('authToken', result.accessToken);
     sessionStorage.setItem('userId', result._id);
 
@@ -71,7 +71,7 @@ export async function login(email, password) {
 export async function register(email, password) {
     const result = await post(settings.host + '/users/register', { email, password });
 
-    sessionStorage.setItem('username', result.username);
+    sessionStorage.setItem('username', email);
     sessionStorage.setItem('authToken', result.accessToken);
     sessionStorage.setItem('userId', result._id);
 

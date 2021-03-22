@@ -1,10 +1,10 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
 import { register } from '../api/data.js'
 
-const registerTemplate = (onSubmit,errorMsg) => html`
+const registerTemplate = (onSubmit, errorMsg) => html`
 <div class="container auth">
     <form action="#" method="" @submit=${onSubmit}>
-        ${errorMsg?html`<div style="color:red;font-size:20px">${errorMsg}</div>`:''}
+        ${errorMsg ? html`<div style="color:red;font-size:20px">${errorMsg}</div>` : ''}
         <fieldset>
             <legend>Register</legend>
             <blockquote>Knowledge is not simply another commodity. On the contrary. Knowledge is never used up.
@@ -36,17 +36,15 @@ export async function registerPage(ctx) {
     ctx.render(registerTemplate(onSubmit))
     async function onSubmit(e) {
         e.preventDefault()
-        const data=[...new FormData(e.target).entries()].map(x=>x[1])
-        if(data.includes('')){
-            return ctx.render(registerTemplate(onSubmit,'All fields are required!'))
+        const data = [...new FormData(e.target).entries()].map(x => x[1])
+        if (data.includes('')) {
+            return ctx.render(registerTemplate(onSubmit, 'All fields are required!'))
         }
-        if(data[1]!=data[2]){
-            return ctx.render(registerTemplate(onSubmit,'Passwords don\'t match!'))
+        if (data[1] != data[2]) {
+            return ctx.render(registerTemplate(onSubmit, 'Passwords don\'t match!'))
         }
 
-        await register(data[0],data[1])
-
-        window.location.reload()
-        window.location.href='http://localhost:3000'
+        await register(data[0], data[1])
+        ctx.page.redirect('/')
     }
 }

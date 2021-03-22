@@ -39,6 +39,7 @@ export async function login(ctx) {
         }
         await log(email,password)
         window.location.reload()
-        window.location.href='http://localhost:3000'
+        window.location.href="http://localhost:3002"
+        ctx.page.redirect('/')
     }
 }

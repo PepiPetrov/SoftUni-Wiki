@@ -8,10 +8,6 @@ export const login = api.login;
 export const register = api.register;
 export const logout = api.logout;
 
-// Implement application-specific requests
-
-// Team Collection
-
 export async function getArticles() {
     const teams = await api.get(host + '/jsonstore/wiki');
     return teams;
@@ -22,6 +18,7 @@ export async function getArticle(id) {
 }
 
 export async function createAritcle(article) {
+    article.likes=0
     const result = await api.post(host + '/jsonstore/wiki', article);
     
     return result;
